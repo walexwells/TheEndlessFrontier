@@ -1,0 +1,10 @@
+---
+layout: default
+---
+<img src="{{site.baseurl}}/volcano.png"/>
+<div>by Alex Wells</div>
+<h1>Episodes</h1>
+{% for episode in site.episodes %}
+<div><a href="{{site.baseurl}}{{episode.url}}">{{episode.episodeNumber}}: {{episode.title}}</a></div>
+
+{% endfor %}

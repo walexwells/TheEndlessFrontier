@@ -1,0 +1,17 @@
+
+baseurl: /TheEndlessFrontier
+
+collections:
+  episodes:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "episodes"
+    values:
+      layout: "episode"
+  - scope:
+      path: ""
+    values:
+      layout: "default"

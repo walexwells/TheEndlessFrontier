@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+{% if page.collection %}
+    {% assign links = site[page.collection]  %}
+{% endif %}
+
+{% for link in links %}
+	{% if link.title == page.title %}
+		{% unless forloop.first %}
+			{% assign prev = tmpprev %}
+		{% endunless %}
+		{% unless forloop.last %}
+			{% assign next = links[forloop.index] %}
+		{% endunless %}
+	{% endif %}
+	{% assign tmpprev = link %}
+{% endfor %}
+
+<div><a href="{{site.baseurl}}/">The Endless Frontier</a></div>
+<h1>Episode {{page.episodeNumber}}: {{page.title}}</h1>
+
+<div class="dots">
+{% for item in site[page.collection] %}
+	{% if item.title == page.title %}
+	○
+	{% else %}
+	<a href="{{site.baseurl}}{{item.url}}">•</a> 
+	{% endif %} 
+{% endfor %}
+</div>
+
+<div class="prevnext">
+{% if prev %}
+	<a href="{{site.baseurl}}{{ prev.url}}">← {{ prev.title }}</a>
+{% else %}
+	<span></span>
+{% endif %}
+{% if next %}<a href="{{site.baseurl}}{{ next.url}}">{{ next.title }} →</a>{% endif %}
+</div>
+
+<script>
+document.body.onkeyup = function(e){
+	console.log(e.keyCode);
+	if (e.keyCode == '37') { window.location = '{{site.baseurl}}{{prev.url}}'; }
+	if (e.keyCode == '39') { window.location = '{{site.baseurl}}{{next.url}}'; }
+};
+</script>
+
+{{content}}
+<div class="prevnext">
+{% if prev %}
+	<a href="{{site.baseurl}}{{prev.url}}">← {{ prev.title }}</a>
+{% else %}
+	<span></span>
+{% endif %}
+{% if next %}<a href="{{site.baseurl}}{{next.url}}">{{ next.title }} →</a>{% endif %}
+</div>
